@@ -1,63 +1,51 @@
-import { Button, Form, Layout, Select, Space, Typography } from "antd"
+import { Button, Empty, Layout, Typography } from "antd"
 import { withAntdConfigProvider } from "../providers/withAntdConfProvider"
-import { Content, Header } from "antd/es/layout/layout"
+import { Content, Footer, Header } from "antd/es/layout/layout"
 import Sider from "antd/es/layout/Sider"
-import { ReactNode, useState } from "react"
-import { RightOutlined } from '@ant-design/icons'
+import { useEffect, useState } from "react"
+import { RightCircleTwoTone, LeftCircleTwoTone } from '@ant-design/icons'
+import MessageSender from "../../features/MessageSender/ui/MessageSender"
+import CreateNewChat from "../../features/CreateNewChat/ui/CreateNewChat"
+import ChatMenu from "../../entities/Chat/ui/ChatMenu/ChatMenu"
+import Chat from "../../entities/Chat/ui/Chat/Chat"
+import { IChat } from "../../entities/Chat/model/interfaces/Chat.intefaces"
 
-const AppLayout = ({children}: {children: ReactNode}): JSX.Element => {
+const AppLayout = (): JSX.Element => {
 
   const [collapsed, setCollapsed] = useState<boolean>(false)
 
-  type FieldType = {
-    organization: number,
-    speaker: number
-  }
+  const [chats, setChats] = useState<IChat[]>([])
+
+  const [currentChatId, setCurrentChatId] = useState<string>('')
 
   return (
     <Layout style={{
-      minHeight: '100vh'
+      height: '100vh'
     }}>
-    <Sider collapsed={collapsed} width={'250px'} style={{padding: '15px '}}>
-      <Button 
-        type="primary" 
-        onClick={() => setCollapsed(!collapsed)}
-        style={{width: '100%', height: '38px'}}>   
-          {collapsed ? <RightOutlined/> : <Typography.Title level={5} style={{color: 'white'}}>Закрыть</Typography.Title>}
-      </Button>
+    <Sider collapsedWidth={0} collapsed={collapsed} width={'250px'} style={{padding: '15px ', position: 'relative'}}>
+      <CreateNewChat chats={chats} setChats={setChats}/>
+      <ChatMenu chats={chats} setCurrentChatId={setCurrentChatId}/>
     </Sider>
-    <Layout>
+    <div style={{height: '100vh', width: 'auto', display: 'flex', alignItems: 'center'}}>
+      <Button
+        type="text" 
+        onClick={() => setCollapsed(!collapsed)}
+        style={{}}>   
+          {collapsed ? <RightCircleTwoTone style={{fontSize: '20px'}}/> : <LeftCircleTwoTone style={{fontSize: '20px'}}/>}
+      </Button>
+    </div>
+    <Layout style={{paddingRight: '52px', position: 'relative'}}>
       <Header style={{padding: '15px 30px', background: '#fff'}}>
-        <Form
-          layout="inline"
-          autoComplete="off"
-          name="prompt"
-          style={{width: '100%'}}>
-            <Form.Item<FieldType> 
-              label="Организация"
-              name="organization"
-              rules={[{ required: true, message: 'Please input your username!' }]}>
-              <Select defaultValue={1} style={{width: 130}} options={[
-                {value: 1, label: 'ЦОН'},
-                {value: 2, label: 'Больницы'},
-                {value: 3, label: 'Налоговая'},
-              ]}/>
-            </Form.Item>
-            <Form.Item<FieldType>
-              label="Спикер"
-              name="speaker"
-              rules={[{ required: true, message: 'Please choose speaker' }]}>
-              <Select defaultValue={1} style={{width: 130}} options={[
-                {value: 1, label: 'Мужской'},
-                {value: 2, label: 'Женский'},
-              ]}/>
-            </Form.Item>
-        </Form>
+        <Typography.Title level={3}>{'Chat'}</Typography.Title>
       </Header>
 
-      <Content style={{padding: '0 30px'}}>
-        {children}
+      <Content style={{padding: '0 30px', overflowY: 'scroll', height: '60vh', background: '#eaeaea'}}>
+        {currentChatId ? <Chat chat={chats.filter(item => item.chatId === currentChatId)[0]}/> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
       </Content>
+
+      <Footer style={{ width: '100%', margin: '20px 0'}}>
+        <MessageSender currentChatId={currentChatId} setChats={setChats} chats={chats}/>
+      </Footer>
     </Layout>
   </Layout>
   )

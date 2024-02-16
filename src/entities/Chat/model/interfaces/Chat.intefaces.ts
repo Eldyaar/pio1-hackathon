@@ -19,4 +19,4 @@ export interface IChat {
 export interface IChatOptions {
   organization: 1 | 2 | 3,
   speaker: 1 | 2
-}
+}   

@@ -2,7 +2,7 @@ import { Button, Empty, Layout, Typography } from "antd"
 import { withAntdConfigProvider } from "../providers/withAntdConfProvider"
 import { Content, Footer, Header } from "antd/es/layout/layout"
 import Sider from "antd/es/layout/Sider"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { RightCircleTwoTone, LeftCircleTwoTone } from '@ant-design/icons'
 import MessageSender from "../../features/MessageSender/ui/MessageSender"
 import CreateNewChat from "../../features/CreateNewChat/ui/CreateNewChat"
@@ -28,7 +28,7 @@ const AppLayout = (): JSX.Element => {
     </Sider>
     <div style={{height: '100vh', width: 'auto', display: 'flex', alignItems: 'center'}}>
       <Button
-        type="text" 
+        type="text"
         onClick={() => setCollapsed(!collapsed)}
         style={{height: '100%'}}>   
           {collapsed ? <RightCircleTwoTone style={{fontSize: '20px'}}/> : <LeftCircleTwoTone style={{fontSize: '20px'}}/>}

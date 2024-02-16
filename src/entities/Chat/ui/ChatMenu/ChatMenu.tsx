@@ -31,7 +31,7 @@ const ChatMenu = ({setCurrentChatId , chats}: {setCurrentChatId: React.Dispatch<
     setMenuProps([getItem('Chats', 'chats', null, chatMenuItems, 'group')])
   }, [chats])
 
-  return (
+  return ( 
     <>
       <Menu
         theme="dark"

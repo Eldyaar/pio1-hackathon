@@ -30,7 +30,7 @@ const AppLayout = (): JSX.Element => {
       <Button
         type="text" 
         onClick={() => setCollapsed(!collapsed)}
-        style={{}}>   
+        style={{height: '100%'}}>   
           {collapsed ? <RightCircleTwoTone style={{fontSize: '20px'}}/> : <LeftCircleTwoTone style={{fontSize: '20px'}}/>}
       </Button>
     </div>

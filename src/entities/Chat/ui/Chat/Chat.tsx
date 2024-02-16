@@ -3,9 +3,6 @@ import { IChat, Sender } from '../../model/interfaces/Chat.intefaces';
 
 const Chat = ({chat}: {chat: IChat}): JSX.Element => {
 
-
-  
-
   return (
     <List
       itemLayout="horizontal"

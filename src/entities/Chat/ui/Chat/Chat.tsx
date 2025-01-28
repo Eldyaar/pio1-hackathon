@@ -11,7 +11,7 @@ const Chat = ({chat}: {chat: IChat}): JSX.Element => {
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar size='large'
-            src={ item.sender === Sender.AI ? 'https://dataconomy.com/wp-content/uploads/2023/10/zalo-AI-avatar_05.jpg' : 'https://e7.pngegg.com/pngimages/348/800/png-clipart-man-wearing-blue-shirt-illustration-computer-icons-avatar-user-login-avatar-blue-child.png'} />}
+            src={item.sender === Sender.AI ? 'https://dataconomy.com/wp-content/uploads/2023/10/zalo-AI-avatar_05.jpg' : 'https://e7.pngegg.com/pngimages/348/800/png-clipart-man-wearing-blue-shirt-illustration-computer-icons-avatar-user-login-avatar-blue-child.png'} />}
             title={
               <Typography.Paragraph
                 style={item.sender === Sender.AI ? {

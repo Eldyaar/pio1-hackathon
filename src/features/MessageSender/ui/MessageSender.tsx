@@ -12,7 +12,6 @@ const MessageSender = ({currentChatId, setChats, chats}: {currentChatId: string,
   })
 
   const onSubmit = async (currentChatId: string) => {
-          
     const url = 'http://localhost:3001/data';
     const data: {  
       tag: string,
@@ -61,7 +60,6 @@ const MessageSender = ({currentChatId, setChats, chats}: {currentChatId: string,
               typeOrganization = 'tax'
               break
           }
-
           
           onSubmit(typeOrganization)
       }}>Send</Button>
